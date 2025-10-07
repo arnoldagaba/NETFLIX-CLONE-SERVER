@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// The User model stores information about each user
+// This mirrors the data we get from Clerk but stores it locally
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique  // This connects to Clerk's user ID
+  email     String   @unique
+  username  String?  // Optional because not all users might set one
+  imageUrl  String?  // Profile picture URL
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships - one user can have many of these items
+  watchlist     Watchlist[]
+  watchHistory  WatchHistory[]
+  favorites     Favorite[]
+  showProgress  ShowProgress[]
+
+  @@index([clerkId])  // Makes searching by clerkId super fast
+  @@index([email])    // Makes searching by email super fast
+}
+
+// Stores movies/shows the user wants to watch later
+model Watchlist {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Content details from TMDB
+  tmdbId      Int
+  contentType String   // "movie" or "tv"
+  title       String
+  posterPath  String?
+  note        String?  // Optional personal note about why they saved it
+  
+  addedAt     DateTime @default(now())
+
+  // Composite index ensures a user can't add the same content twice
+  @@unique([userId, tmdbId, contentType])
+  @@index([userId])
+}
+
+// Tracks what users have watched and how much they watched
+model WatchHistory {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  tmdbId       Int
+  contentType  String   // "movie" or "tv"
+  title        String
+  posterPath   String?
+  
+  // Watch details
+  duration     Int?     // How long they watched in seconds
+  completed    Boolean  @default(false)
+  
+  // For TV shows
+  seasonNumber  Int?
+  episodeNumber Int?
+  
+  watchedAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, watchedAt])
+}
+
+// Simple favorites list
+model Favorite {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  tmdbId      Int
+  contentType String   // "movie" or "tv"
+  title       String
+  posterPath  String?
+  
+  addedAt     DateTime @default(now())
+
+  @@unique([userId, tmdbId, contentType])
+  @@index([userId])
+}
+
+// Tracks progress through TV show episodes
+model ShowProgress {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  tmdbShowId    Int
+  seasonNumber  Int
+  episodeNumber Int
+  
+  duration      Int?     // Seconds watched of this episode
+  completed     Boolean  @default(false)
+  
+  watchedAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Each user can only have one progress entry per episode
+  @@unique([userId, tmdbShowId, seasonNumber, episodeNumber])
+  @@index([userId, tmdbShowId])
+}
+
+// Cache for TMDB API responses to reduce API calls
+model ContentCache {
+  id          String   @id @default(cuid())
+  
+  // What we're caching (the combination is unique)
+  tmdbId      Int
+  contentType String   // "movie", "tv", "trending", etc.
+  endpoint    String   // Which TMDB endpoint this came from
+  
+  // The actual cached data as JSON
+  data        Json
+  
+  // Cache management
+  cachedAt    DateTime @default(now())
+  expiresAt   DateTime
+  
+  @@unique([tmdbId, contentType, endpoint])
+  @@index([expiresAt])  // Helps clean up expired cache entries
+}
