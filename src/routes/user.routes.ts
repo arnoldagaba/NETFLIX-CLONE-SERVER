@@ -2,8 +2,8 @@ import { Router } from "express";
 import {
 	getCurrentUser,
 	syncUserProfile,
-} from "#controllers/user.controller.js";
-import { requireAuth } from "#middleware/auth.middleware.js";
+} from "../controllers/user.controller.js";
+import { requireAuth } from "../middleware/auth.middleware.js";
 
 /**
  * User Routes

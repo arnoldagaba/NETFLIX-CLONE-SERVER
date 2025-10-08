@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import prisma from "#config/prisma.js";
-import { findOrCreateUser } from "#services/user.service.js";
-import logger from "#utils/logger.js";
+import prisma from "../config/prisma.js";
+import { findOrCreateUser } from "../services/user.service.js";
+import logger from "../utils/logger.js";
 
 /**
  * Watchlist Controllers

@@ -13,8 +13,8 @@ import {
 	getTrendingMovies,
 	getUpcomingMovies,
 	searchMovies,
-} from "#controllers/movie.controller.js";
-import { optionalAuth } from "#middleware/auth.middleware.js";
+} from "../controllers/movie.controller.js";
+import { optionalAuth } from "../middleware/auth.middleware.js";
 
 /**
  * Movie Routes

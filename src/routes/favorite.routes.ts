@@ -4,8 +4,8 @@ import {
 	checkFavoriteStatus,
 	getFavorites,
 	removeFromFavorites,
-} from "#controllers/favorite.controller.js";
-import { requireAuth } from "#middleware/auth.middleware.js";
+} from "../controllers/favorite.controller.js";
+import { requireAuth } from "../middleware/auth.middleware.js";
 
 const router: Router = Router();
 

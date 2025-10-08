@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance } from "axios";
-import { env } from "#config/env.js";
-import prisma from "#config/prisma.js";
+import { env } from "../config/env.js";
+import prisma from "../config/prisma.js";
 import type {
 	TMDBContentType,
 	TMDBCredits,
@@ -12,8 +12,8 @@ import type {
 	TMDBTVShow,
 	TMDBTVShowDetails,
 	TMDBVideo,
-} from "#types/tmdb.types.js";
-import logger from "#utils/logger.js";
+} from "../types/tmdb.types.js";
+import logger from "../utils/logger.js";
 
 /**
  * TMDB Service

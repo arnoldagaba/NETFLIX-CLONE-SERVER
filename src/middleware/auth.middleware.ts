@@ -2,7 +2,7 @@ import { clerkClient } from "@clerk/clerk-sdk-node";
 import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import logger from "#utils/logger.js";
+import logger from "../utils/logger.js";
 
 /**
  * Authentication Middleware

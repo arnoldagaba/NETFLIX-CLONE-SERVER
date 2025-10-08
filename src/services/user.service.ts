@@ -1,6 +1,6 @@
 import { clerkClient } from "@clerk/clerk-sdk-node";
-import prisma from "#config/prisma.js";
-import logger from "#utils/logger.js";
+import prisma from "../config/prisma.js";
+import logger from "../utils/logger.js";
 
 /**
  * User Service

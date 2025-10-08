@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { BadRequestError } from "#utils/errors.js";
+import { BadRequestError } from "../utils/errors.js";
 
 /**
  * Validation Middleware

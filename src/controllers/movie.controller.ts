@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { tmdbService } from "#services/tmdb.service.js";
-import logger from "#utils/logger.js";
+import { tmdbService } from "../services/tmdb.service.js";
+import logger from "../utils/logger.js";
 
 /**
  * Movie Controllers

@@ -1,9 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import { env } from "#config/env.js";
-import { APIError } from "#utils/errors.js";
-import logger from "#utils/logger.js";
+import { env } from "../config/env.js";
+import { APIError } from "../utils/errors.js";
+import logger from "../utils/logger.js";
 
 /**
  * Global Error Handler Middleware

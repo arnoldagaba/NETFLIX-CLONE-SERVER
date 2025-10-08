@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { findOrCreateUser, /* getUserByClerkId */} from "#services/user.service.js";
-import logger from "#utils/logger.js";
+import { findOrCreateUser, /* getUserByClerkId */} from "../services/user.service.js";
+import logger from "../utils/logger.js";
 
 /**
  * User Controller

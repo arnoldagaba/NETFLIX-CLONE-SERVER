@@ -4,8 +4,8 @@ import {
 	addToWatchlist,
 	removeFromWatchlist,
 	checkWatchlistStatus,
-} from "#controllers/watchlist.controller.js";
-import { requireAuth } from "#middleware/auth.middleware.js";
+} from "../controllers/watchlist.controller.js";
+import { requireAuth } from "../middleware/auth.middleware.js";
 
 /**
  * Watchlist Routes

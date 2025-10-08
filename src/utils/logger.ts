@@ -8,7 +8,7 @@ import pino, {
 } from "pino";
 import { createStream } from "rotating-file-stream";
 
-import { env } from "#config/env.js";
+import { env } from "../config/env.js";
 
 const isDevelopment = env.NODE_ENV === "development";
 const isProduction = env.NODE_ENV === "production";

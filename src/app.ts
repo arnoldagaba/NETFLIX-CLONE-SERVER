@@ -8,9 +8,9 @@ import express, {
 import helmet from "helmet";
 import { pinoHttp } from "pino-http";
 
-import { errorHandler, notFoundHandler } from "#middleware/error.middleware.js";
-import { generalLimiter } from "#middleware/rateLimit.middleware.js";
-import appRoutes from "#routes/index.js";
+import { errorHandler, notFoundHandler } from "./middleware/error.middleware.js";
+import { generalLimiter } from "./middleware/rateLimit.middleware.js";
+import appRoutes from "./routes/index.js";
 import { env } from "./config/env.js";
 
 const app: Express = express();

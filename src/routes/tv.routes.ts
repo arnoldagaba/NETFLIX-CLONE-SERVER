@@ -11,8 +11,8 @@ import {
 	getTVShowRecommendations,
 	getTVShowVideos,
 	searchTVShows,
-} from "#controllers/tv.controller.js";
-import { optionalAuth } from "#middleware/auth.middleware.js";
+} from "../controllers/tv.controller.js";
+import { optionalAuth } from "../middleware/auth.middleware.js";
 
 /**
  * TV Show Routes
