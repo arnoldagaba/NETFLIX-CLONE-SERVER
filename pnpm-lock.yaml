@@ -63,14 +63,14 @@ importers:
         specifier: ^6.14.0
         version: 6.14.0
       rotating-file-stream:
-        specifier: ^3.2.7
+        specifier: ^1.4.7
         version: 3.2.7
       zod:
         specifier: ^4.1.11
         version: 4.1.11
     devDependencies:
       '@biomejs/biome':
-        specifier: latest
+        specifier: ^3.2.7
         version: 2.2.5
       '@tsconfig/node22':
         specifier: ^22.0.2
