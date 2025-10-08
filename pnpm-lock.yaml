@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@clerk/clerk-sdk-node':
+        specifier: ^5.1.6
+        version: 5.1.6(react@19.2.0)
       '@clerk/express':
         specifier: ^1.7.36
         version: 1.7.36(express@5.1.0)(react@19.2.0)
@@ -63,9 +66,6 @@ importers:
       '@biomejs/biome':
         specifier: latest
         version: 2.2.5
-      '@clerk/clerk-sdk-node':
-        specifier: ^5.1.6
-        version: 5.1.6(react@19.2.0)
       '@prisma/adapter-pg':
         specifier: ^6.16.3
         version: 6.16.3

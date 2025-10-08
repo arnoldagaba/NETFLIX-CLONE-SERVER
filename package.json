@@ -19,6 +19,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.18.1+sha512.77a884a165cbba2d8d1c19e3b4880eee6d2fcabd0d879121e282196b80042351d5eb3ca0935fa599da1dc51265cc68816ad2bddd2a2de5ea9fdf92adbec7cd34",
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.1.6",
     "@clerk/express": "^1.7.36",
     "argon2": "^0.44.0",
     "axios": "^1.12.2",
@@ -39,7 +40,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "latest",
-    "@clerk/clerk-sdk-node": "^5.1.6",
     "@prisma/adapter-pg": "^6.16.3",
     "@prisma/client": "^6.16.3",
     "@tsconfig/node22": "^22.0.2",
