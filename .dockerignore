@@ -7,6 +7,9 @@ yarn-error.log
 dist
 build
 
+# Generated Prisma Client - will be regenerated during build
+src/generated
+
 # Environment files
 .env
 .env.local
@@ -33,8 +36,6 @@ Thumbs.db
 
 # Documentation
 README.md
-API_DOCUMENTATION.md
-QUICK_REFERENCE.md
 docs
 
 # CI/CD
