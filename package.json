@@ -21,6 +21,8 @@
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.1.6",
     "@clerk/express": "^1.7.36",
+    "@prisma/adapter-pg": "^6.17.0",
+    "@prisma/client": "^6.17.0",
     "argon2": "^0.44.0",
     "axios": "^1.12.2",
     "compression": "^1.8.1",
@@ -40,8 +42,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "latest",
-    "@prisma/adapter-pg": "^6.16.3",
-    "@prisma/client": "^6.16.3",
     "@tsconfig/node22": "^22.0.2",
     "@types/compression": "^1.8.1",
     "@types/cookie-parser": "^1.4.9",
