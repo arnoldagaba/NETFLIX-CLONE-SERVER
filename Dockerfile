@@ -1,5 +1,8 @@
 # Use Node.js LTS version as the base image
-FROM node:20-alpine AS base
+FROM node:24-slim AS base
+
+# Install pnpm globally
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -7,27 +10,26 @@ FROM base AS deps
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-# Install dependencies
-RUN npm ci --only=production && npm cache clean --force
+# Install production dependencies only
+RUN pnpm install --prod --frozen-lockfile
 
 # Build stage - compile TypeScript
 FROM base AS builder
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Install all dependencies (including dev dependencies for building)
-RUN npm ci
+RUN pnpm install --frozen-lockfile
 
 # Copy source code
 COPY . .
 
 # Build TypeScript code
-# This assumes your build script is in package.json
-RUN npm run build
+RUN pnpm build
 
 # Production stage - create the final image
 FROM base AS runner
@@ -43,7 +45,7 @@ RUN addgroup --system --gid 1001 nodejs && \
 # Copy only necessary files from previous stages
 COPY --from=deps --chown=nodejs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
-COPY --from=builder --chown=nodejs:nodejs /app/package*.json ./
+COPY --from=builder --chown=nodejs:nodejs /app/package.json ./
 
 # Switch to non-root user
 USER nodejs
